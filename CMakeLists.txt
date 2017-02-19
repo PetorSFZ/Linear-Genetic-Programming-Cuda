@@ -86,6 +86,11 @@ set(CUDA_NVCC_FLAGS_RELEASE ${CUDA_NVCC_FLAGS_RELEASE} -O3 -use_fast_math)
 # Executable
 # ------------------------------------------------------------------------------------------------
 
+include_directories(
+	${SOURCE_DIR}
+	${SFZ_CORE_INCLUDE_DIRS}
+)
+
 set(LGP_CUDA_FILES
 	${SOURCE_DIR}/CudaBuffer.hpp
 	${SOURCE_DIR}/CudaGLInterop.hpp
@@ -98,11 +103,6 @@ set(LGP_CUDA_FILES
 set_directory_source_group(${LGP_CUDA_FILES})
 
 cuda_add_executable(LGP ${LGP_CUDA_FILES})
-target_include_directories(
-	LGP
-	PUBLIC
-	${SFZ_CORE_INCLUDE_DIRS}
-)
 target_link_libraries(
 	LGP
 	${SFZ_CORE_LIBRARIES}
